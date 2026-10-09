@@ -1,5 +1,8 @@
 # AI Agent Skills
 
+[![Install with npx skills](https://img.shields.io/badge/Install-npx_skills-blue)](https://github.com/saneci/ai-agent-skills#installation)
+[![skills.sh](https://skills.sh/b/saneci/ai-agent-skills)](https://skills.sh/saneci/ai-agent-skills)
+
 A collection of skills for AI coding agents.
 
 ## Overview
@@ -33,6 +36,26 @@ skills/
 | [`system-use-case-builder`](skills/system-use-case-builder/SKILL.md)     | Build structured system use cases with a call flow rendered as a Sequence Diagram                           |
 | [`java-spring-code-review`](skills/java-spring-code-review/SKILL.md)     | Review Java/Spring Boot code against the target project's AGENTS.md and industry conventions                |
 | [`java-backend-developer`](skills/java-backend-developer/SKILL.md)       | Implement Java/Spring Boot backend features against the target project's AGENTS.md and industry conventions |
+
+## Installation
+
+Install a skill into your agent directly from this repository using the [`npx skills`](https://skills.sh) CLI:
+
+```bash
+npx skills add https://github.com/saneci/ai-agent-skills --skill <skill-name>
+```
+
+Or use the helper script, which runs the CLI for you and prints a JSON summary:
+
+```bash
+node scripts/install.mjs --help       # show help
+node scripts/install.mjs --list       # list available skills
+node scripts/install.mjs --all        # install every skill
+node scripts/install.mjs <skill-name> # install one skill
+```
+
+Alternatively, copy (or symlink) the skill folder into your agent's native skills directory —
+see [AGENTS.md](AGENTS.md#distribution).
 
 ## Usage
 

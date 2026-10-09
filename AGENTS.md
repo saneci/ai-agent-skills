@@ -26,6 +26,8 @@ Rules:
 - Keep the `skills/` directory name; do not invent new layouts without a reason.
 - Agent-specific paths (for example `.cline/skills/`, `.claude/skills/`) are distribution targets, not storage locations in this repository.
 
+Repository-level tooling (for example `scripts/install.mjs`) lives in the top-level `scripts/` directory and follows the same [script requirements](#script-requirements) as skill scripts.
+
 ## Creating a New Skill
 
 ### Directory Structure
@@ -103,7 +105,13 @@ Skills are loaded on demand — only the skill `name` and `description` are read
 
 ## Distribution
 
-Skills reach users by copying (or symlinking) the skill folder from the top-level `skills/` directory into the agent's native skills directory, for example:
+The primary way to install a skill is the `skills` CLI, which pulls it straight from this repository:
+
+```bash
+npx skills add https://github.com/saneci/ai-agent-skills --skill {skill-name}
+```
+
+Alternatively, copy (or symlink) the skill folder from the top-level `skills/` directory into the agent's native skills directory, for example:
 
 ```bash
 # Cline
