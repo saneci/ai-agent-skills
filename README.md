@@ -7,30 +7,32 @@ A collection of skills for AI coding agents.
 This repository contains reusable skills that AI coding agents can activate automatically (when a request matches the
 `description` in the skill's frontmatter) or invoke explicitly by name.
 
-Skills are currently authored for **Cline**. The repository is designed to also host skills for
-other agents (for example Claude Code, Cursor, GitHub Copilot) in the future. See
-[AGENTS.md](AGENTS.md) for the layout and contribution conventions.
+Skills are agent-agnostic: the same skill can be distributed to any supported agent (for example
+Cline, Claude Code, Cursor, GitHub Copilot). See [AGENTS.md](AGENTS.md) for the layout and
+contribution conventions.
 
 ## Structure
 
 ```
-.cline/
-└── skills/
-    ├── business-use-case-builder/
-    │   └── SKILL.md
-    ├── java-spring-code-review/
-    │   └── SKILL.md
-    └── system-use-case-builder/
-        └── SKILL.md
+skills/
+├── business-use-case-builder/
+│   └── SKILL.md
+├── java-backend-developer/
+│   └── SKILL.md
+├── java-spring-code-review/
+│   └── SKILL.md
+└── system-use-case-builder/
+    └── SKILL.md
 ```
 
 ## Skills
 
-| Skill                                                                           | Purpose                                                                           |
-|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| [`business-use-case-builder`](.cline/skills/business-use-case-builder/SKILL.md) | Build structured business use cases from raw process information                  |
-| [`system-use-case-builder`](.cline/skills/system-use-case-builder/SKILL.md)     | Build structured system use cases with a call flow rendered as a Sequence Diagram |
-| [`java-spring-code-review`](.cline/skills/java-spring-code-review/SKILL.md)     | Review Java/Spring Boot code against AGENTS.md and industry conventions           |
+| Skill                                                                    | Purpose                                                                                                     |
+|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| [`business-use-case-builder`](skills/business-use-case-builder/SKILL.md) | Build structured business use cases from raw process information                                            |
+| [`system-use-case-builder`](skills/system-use-case-builder/SKILL.md)     | Build structured system use cases with a call flow rendered as a Sequence Diagram                           |
+| [`java-spring-code-review`](skills/java-spring-code-review/SKILL.md)     | Review Java/Spring Boot code against the target project's AGENTS.md and industry conventions                |
+| [`java-backend-developer`](skills/java-backend-developer/SKILL.md)       | Implement Java/Spring Boot backend features against the target project's AGENTS.md and industry conventions |
 
 ## Usage
 
@@ -43,7 +45,7 @@ Activation:
 
 ## Adding a New Skill
 
-1. Create a directory under the agent's skills root, e.g. `.cline/skills/<skill-name>/`.
+1. Create a directory under the top-level `skills/` root, e.g. `skills/<skill-name>/`.
 2. Add a `SKILL.md` file with frontmatter:
 
    ```markdown

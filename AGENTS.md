@@ -6,37 +6,32 @@ This file provides guidance to AI coding agents (Cline, Claude Code, Cursor, Git
 
 `ai-agent-skills` is a collection of reusable **skills** for AI coding agents. A skill is a self-contained folder that packages instructions — and optionally scripts — that extend an agent's capabilities for a specific task.
 
-Skills are currently authored for **Cline**. The repository is designed to also host skills for other agents (for example Claude Code, Cursor, GitHub Copilot) in the future.
+Skills are agent-agnostic: the same skill can be distributed to any supported agent (for example Cline, Claude Code, Cursor, GitHub Copilot).
 
-Skills are task-oriented, not stack-oriented: they target a concrete activity (business analysis, code review, and so on) rather than a specific framework or product.
+Skills target a concrete activity or role (business analysis, code review, backend development, and so on) rather than a specific product.
 
 ## Repository Layout
 
-Skills live under an agent-specific root directory that matches the agent's native discovery convention. The currently used root is:
+Skills live in a single, agent-agnostic root directory at the top level of the repository:
 
 ```
-.cline/skills/{skill-name}/SKILL.md    # Cline
+skills/{skill-name}/SKILL.md
 ```
 
-When a skill is added for another agent, place it under that agent's own root, for example:
-
-```
-.claude/skills/{skill-name}/SKILL.md   # Claude Code
-.cursor/skills/{skill-name}/SKILL.md   # Cursor
-```
+A skill is not tied to a specific agent. To make it available to an agent, copy (or symlink) the skill folder into that agent's native skills directory — see [Distribution](#distribution).
 
 Rules:
 
-- **One agent = one root directory.** Never mix skills for different agents under the same path.
-- Keep the `skills/` directory name inside the agent root; do not invent new layouts without a reason.
-- If the same skill should be available to several agents, keep a single canonical copy and mirror it into the other agent roots, adapting for any format differences.
+- **One canonical copy.** Keep each skill once under `skills/`; never duplicate the same skill per agent.
+- Keep the `skills/` directory name; do not invent new layouts without a reason.
+- Agent-specific paths (for example `.cline/skills/`, `.claude/skills/`) are distribution targets, not storage locations in this repository.
 
 ## Creating a New Skill
 
 ### Directory Structure
 
 ```
-{agent-root}/skills/
+skills/
   {skill-name}/           # kebab-case directory name
     SKILL.md              # Required: skill definition
     scripts/              # Optional: executable scripts
@@ -46,7 +41,7 @@ Rules:
     lib/                  # Optional: shared code for scripts
 ```
 
-The three skills in `.cline/skills/` (`business-use-case-builder`, `system-use-case-builder`, `java-spring-code-review`) are the reference examples for structure and tone — keep new skills consistent with them.
+The skills in `skills/` (`business-use-case-builder`, `system-use-case-builder`, `java-spring-code-review`, `java-backend-developer`) are the reference examples for structure and tone — keep new skills consistent with them.
 
 ### Naming Conventions
 
@@ -108,11 +103,14 @@ Skills are loaded on demand — only the skill `name` and `description` are read
 
 ## Distribution
 
-Skills reach users by copying (or symlinking) the skill folder from this repository into the agent's skills directory, for example:
+Skills reach users by copying (or symlinking) the skill folder from the top-level `skills/` directory into the agent's native skills directory, for example:
 
 ```bash
 # Cline
-cp -r .cline/skills/{skill-name} ~/.cline/skills/
+cp -r skills/{skill-name} ~/.cline/skills/
+
+# Claude Code
+cp -r skills/{skill-name} ~/.claude/skills/
 ```
 
 Follow the target agent's own documentation for the exact install path and format.
